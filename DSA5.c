@@ -1,0 +1,88 @@
+#include<stdio.h>
+
+#include<math.h>
+
+#include<stdio.h>
+
+#include<math.h>
+
+#include<string.h>
+
+#include<ctype.h>
+int power(int v1,int v2){
+int res=1;
+for(int i=0;i<=v1;i++){
+res=res*v1;
+}
+return res;
+}
+
+int compute(char symbol, int op1, int op2)
+
+{
+ switch(symbol)
+
+{
+
+  case '+': return op1+op2;
+
+  case '-': return op1-op2;
+
+  case '*': return op1*op2;
+
+  case '/': return op1/op2;
+
+  case '%': return op1%op2;
+
+  case '$':
+
+  case '^': return power(op1,op2); /* Compute power */
+
+}
+}
+
+void main()
+
+{
+
+int s[20];
+
+int res; 
+
+int op1; 
+
+int op2; 
+int top;
+
+int i;
+char postfix[20]; 
+char symbol; 
+
+printf("Enter the postfix expression\n");
+scanf("%s", postfix);
+top=-1;
+for(i=0;i<strlen(postfix);i++)
+
+{
+symbol=postfix[i]; 
+if(isdigit(symbol)) {
+s[++top]=symbol-'0';
+}
+else
+{
+
+op2=s[top--];
+
+op1=s[top--];
+
+res=compute(symbol,op1,op2);
+
+s[++top]=res;
+}
+}
+res=s[top--];
+
+printf("the result is %d\n", res);
+
+}
+
